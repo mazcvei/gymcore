@@ -1,0 +1,167 @@
+/* ============================= */
+/* COLORES DEL TEMA */
+/* ============================= */
+
+:root{
+    --gym-green: #28a745;
+    --gym-green-dark: #1e7e34;
+    --gym-black: #121212;
+}
+
+/* ============================= */
+/* BODY */
+/* ============================= */
+
+body{
+    background-color:#f8f9fa;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ============================= */
+/* NAVBAR */
+/* ============================= */
+
+.navbar{
+    background-color: white;
+    border-bottom:1px solid #eee;
+}
+
+.navbar-brand{
+    font-weight:700;
+    color:var(--gym-green) !important;
+}
+
+/* ============================= */
+/* BOTONES */
+/* ============================= */
+
+.btn-primary{
+    background-color:var(--gym-green);
+    border-color:var(--gym-green);
+}
+
+.btn-primary:hover{
+    background-color:var(--gym-green-dark);
+    border-color:var(--gym-green-dark);
+}
+
+.btn-outline-primary{
+    color:var(--gym-green);
+    border-color:var(--gym-green);
+}
+
+.btn-outline-primary:hover{
+    background-color:var(--gym-green);
+    border-color:var(--gym-green);
+}
+
+
+.btn-dark{
+    background-color:var(--gym-black);
+    border-color:var(--gym-black);
+}
+
+.btn{
+    border-radius: 0.175rem;
+}
+a{
+    color:var(--gym-green);
+}
+
+a:hover{
+    color:var(--gym-green-dark);
+}
+
+
+.card{
+    border:none;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+
+.form-control{
+    border-radius:8px;
+}
+
+.form-control:focus{
+    border-color:var(--gym-green);
+    box-shadow:0 0 0 0.2rem rgba(40,167,69,0.25);
+}
+
+
+.hero{
+    color:white;
+    padding:120px 0;
+}
+
+.footer{
+    background:var(--gym-black);
+    color:white;
+    padding:30px;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+/* Navbar */
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+
+.hero {
+    background: url("../images/gym.jpg") center/cover no-repeat;
+    color: white;
+    padding: 120px 0;
+    position: relative;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.gym-gallery{
+    width:100%;
+}
+
+.carousel-img{
+    height:500px;
+    object-fit:cover;
+}
+
+.feature-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.auth-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
