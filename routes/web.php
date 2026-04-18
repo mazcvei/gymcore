@@ -41,8 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/eliminar-clase/{gymClass}', [GymClassController::class, 'destroy'])->name('admin.classes.destroy');
 
         Route::get('entrenadores', [AdminController::class, 'indexTrainers'])->name('admin.trainers.index');
-        Route::get('nuevo-entrenador', [AdminController::class, 'createTrainer'])->name('admin.trainers.create');
-        Route::get('editar-entrenador/{trainer}', [AdminController::class, 'editTrainer'])->name('admin.trainers.edit');
+        Route::get('editar-entrenador/{trainer?}', [AdminController::class, 'editTrainer'])->name('admin.trainers.edit');
         Route::put('editar-entrenador/{trainer}', [AdminController::class, 'updateTrainer'])->name('admin.trainers.update');
         Route::post('crear-entrenador', [AdminController::class, 'storeTrainer'])->name('admin.trainers.store');
         Route::delete('entrenadores/{trainer}', [AdminController::class, 'destroyTrainer'])->name('admin.trainers.destroy');

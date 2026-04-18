@@ -34,7 +34,7 @@
         </div>
         <div class="col-md-6 text-right">
             <a href="{{ route('admin.classes.create') }}" class="btn btn-success">
-                <i class="glyphicon glyphicon-plus"></i> Nueva clase
+                <i class="glyphicon glyphicon-plus" style="color:white"></i> Nueva clase
             </a>
         </div>
     </div>

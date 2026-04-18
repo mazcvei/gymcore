@@ -5,7 +5,7 @@
 
     <div class="row" style="margin-top: 5rem;">
         <div class="col-md-8 col-md-offset-2">
-             @if(session('success'))
+            @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>

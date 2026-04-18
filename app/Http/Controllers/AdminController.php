@@ -29,6 +29,13 @@ class AdminController extends Controller
         return view('admin.classes.index', compact('classes'));
     }
 
+     public function indexMemberships()
+    {
+        $memberships = \App\Models\Membership::with('user', 'membershipPlan')->get();
+        return view('admin.memberships.index', compact('memberships'));
+    }
+
+
     public function indexTrainers()
     {
         $roleTrainer = \App\Models\Role::where('name', 'trainer')->first()->id;
@@ -38,9 +45,9 @@ class AdminController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function createTrainer(User $user)
+    public function editTrainer(User $trainer = null)
     {
-        return view('admin.trainers.create', compact('user'));
+        return view('admin.trainers.edit', compact('trainer'));
     }
 
     /**
@@ -51,6 +58,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'nullable|string|max:255',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -59,6 +67,7 @@ class AdminController extends Controller
         $trainer = new \App\Models\User();
         $trainer->name = $request->name;
         $trainer->email = $request->email;
+        $trainer->phone = $request->phone;
         $trainer->password = Hash::make($request->password);
         $trainer->role_id = $trainerRole->id;
         $trainer->save();
@@ -88,27 +97,11 @@ class AdminController extends Controller
             ->with('success', 'Entrenador actualizado correctamente');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+  
+    public function destroyTrainer(User $trainer)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $trainer->delete();
+        return redirect()->route('admin.trainers.index')
+            ->with('success', 'Entrenador eliminado correctamente');
     }
 }

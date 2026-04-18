@@ -16,5 +16,10 @@ class Membership extends Model
     public function membershipPlan()
     {
         return $this->belongsTo(MembershipPlan::class, 'type_id');
-    }   
+    }  
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

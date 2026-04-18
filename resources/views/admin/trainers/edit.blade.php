@@ -27,10 +27,8 @@
                             </ul>
                         </div>
                     @endif
-
-                    {{-- FORM --}}
-                    <form action="{{ isset($trainer) 
-                        ? route('admin.trainers.update', $trainer) 
+             
+                    <form action="{{ isset($trainer) ? route('admin.trainers.update', $trainer) 
                         : route('admin.trainers.store') }}"
                         method="POST">
 
@@ -39,7 +37,6 @@
                             @method('PUT')
                         @endif
 
-                        {{-- NOMBRE --}}
                         <div class="form-group">
                             <label>Nombre</label>
                             <input type="text"
@@ -49,7 +46,7 @@
                                    required>
                         </div>
 
-                        {{-- APELLIDO --}}
+        
                         <div class="form-group">
                             <label>Apellido</label>
                             <input type="text"
@@ -58,7 +55,7 @@
                                    value="{{ old('lastname', $trainer->lastname ?? '') }}">
                         </div>
 
-                        {{-- EMAIL --}}
+                
                         <div class="form-group">
                             <label>Email</label>
                             <input type="email"
@@ -68,7 +65,7 @@
                                    required>
                         </div>
 
-                        {{-- TELÉFONO --}}
+             
                         <div class="form-group">
                             <label>Teléfono</label>
                             <input type="text"
@@ -77,7 +74,7 @@
                                    value="{{ old('phone', $trainer->phone ?? '') }}">
                         </div>
 
-                        {{-- PASSWORD --}}
+              
                         <div class="form-group">
                             <label>
                                 Password 
@@ -92,7 +89,7 @@
                                    {{ isset($trainer) ? '' : 'required' }}>
                         </div>
 
-                        {{-- CONFIRM PASSWORD --}}
+              
                         <div class="form-group">
                             <label>Confirmar password</label>
                             <input type="password"
@@ -103,7 +100,7 @@
 
                         <hr>
 
-                        {{-- BOTÓN --}}
+              
                         <button type="submit" class="btn btn-success btn-block">
                             {{ isset($trainer) ? 'Actualizar entrenador' : 'Crear entrenador' }}
                         </button>

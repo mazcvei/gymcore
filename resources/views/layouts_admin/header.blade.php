@@ -25,7 +25,7 @@
 											<li>
 												<form method="POST" action="{{ route('logout') }}">
 													@csrf
-													<button class="dropdown-item text-danger">
+													<button class="">
 														Cerrar sesión
 													</button>
 												</form>

@@ -30,8 +30,10 @@ class PaymentController extends Controller
      */
     public function store(StorePaymentRequest $request, MembershipPlan $membershipplan)
     {
-        $userMembership = Membership::where('user_id', auth()->id())->first()->delete(); 
-
+        $userMembership = Membership::where('user_id', auth()->id())->first(); 
+        if($userMembership){
+            $userMembership->delete();
+        }
         $membership = Membership::create([
             'user_id' => auth()->id(),
             'type_id' => $membershipplan->id,

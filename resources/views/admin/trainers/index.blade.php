@@ -4,20 +4,25 @@
 
 <div class="container">
 
-    {{-- HEADER --}}
+       @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
     <div class="row" style="margin-bottom:20px; margin-top: 5rem;">
         <div class="col-md-6">
             <h2 style="margin-top:0;"><strong>Entrenadores</strong></h2>
         </div>
         <div class="col-md-6 text-right">
-            <a href="{{ route('admin.trainers.create') }}" class="btn btn-success">
-                <i class="glyphicon glyphicon-plus"></i> Nuevo entrenador
+            <a href="{{ route('admin.trainers.edit') }}" class="btn btn-success">
+                <i class="glyphicon glyphicon-plus" style="color:white"></i> Nuevo entrenador
             </a>
         </div>
     </div>
 
     {{-- GRID --}}
     <div class="row row-eq-height">
+        
 
         <div class="table-responsive">
             <table class="table table-hover">
@@ -26,7 +31,6 @@
                         <th>Nombre</th>
                         <th>Email</th>
                         <th>Teléfono</th>
-                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -42,10 +46,6 @@
                         <td>{{ $trainer->email }}</td>
 
                         <td>{{ $trainer->phone ?? '—' }}</td>
-
-                        <td>
-                            <span class="label label-success">Activo</span>
-                        </td>
 
                         <td>
                             <a href="{{ route('admin.trainers.edit', $trainer) }}"

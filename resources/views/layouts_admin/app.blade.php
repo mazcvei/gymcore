@@ -29,6 +29,7 @@
 		        
 		        <li><a href="{{route('admin.classes.index')}}"><i class="fa fa-bar-chart"></i><span>Clases</span></a></li>
 		        <li><a href="{{route('admin.trainers.index')}}"><i class="fa fa-user"></i><span>Entrenadores</span></a></li>
+		        <li><a href="{{route('admin.memberships.index')}}"><i class="fa fa-credit-card"></i><span>Membresías</span></a></li>
 
 		        
 		      </ul>
