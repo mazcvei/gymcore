@@ -22,6 +22,15 @@
                                 required>
                         </div>
 
+                         <div class="col-md-6 mb-3">
+                            <label class="form-label">Apellidos</label>
+                            <input
+                                type="text"
+                                name="lastname"
+                                class="form-control"
+                                required>
+                        </div>
+
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Email</label>
                             <input

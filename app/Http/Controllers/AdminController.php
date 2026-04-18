@@ -2,46 +2,90 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassSchedule;
+use App\Models\GymClass;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index1()
+    
+    public function index()
     {
-
-        return view('admin1.index');
+        $countUsers = \App\Models\User::count();
+        $countClasses = GymClass::count();
+        $countReservations = \App\Models\Reservation::count();
+        $countActiveMemberships = \App\Models\Membership::where('end_date', '>', now())->count();
+        return view('admin.index', compact('countUsers', 'countClasses', 'countReservations', 'countActiveMemberships'));
     }
-    public function index2()
+
+    public function indexClasses()
     {
-
-        return view('admin2.index');
+        $classes = GymClass::with('trainer')->get();
+        return view('admin.classes.index', compact('classes'));
     }
 
+    public function indexTrainers()
+    {
+        $roleTrainer = \App\Models\Role::where('name', 'trainer')->first()->id;
+        $trainers = \App\Models\User::where('role_id', $roleTrainer)->get();
+        return view('admin.trainers.index', compact('trainers'));
+    }
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function createTrainer(User $user)
     {
-        //
+        return view('admin.trainers.create', compact('user'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function storeTrainer(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $trainerRole = \App\Models\Role::where('name', 'trainer')->first();
+
+        $trainer = new \App\Models\User();
+        $trainer->name = $request->name;
+        $trainer->email = $request->email;
+        $trainer->password = Hash::make($request->password);
+        $trainer->role_id = $trainerRole->id;
+        $trainer->save();
+        return redirect()->route('admin.trainers.index')->with('success', 'Entrenador creado correctamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function updateTrainer(Request $request, User $trainer)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'lastname' => 'nullable',
+            'email' => 'required|email|unique:users,email,' . $trainer->id,
+            'phone' => 'nullable',
+            'password' => 'nullable|confirmed|min:6',
+        ]);
+
+        // Solo actualizar password si se envía
+        if (!empty($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
+        } else {
+            unset($data['password']);
+        }
+
+        $trainer->update($data);
+
+        return redirect()->route('admin.trainers.index')
+            ->with('success', 'Entrenador actualizado correctamente');
     }
 
     /**

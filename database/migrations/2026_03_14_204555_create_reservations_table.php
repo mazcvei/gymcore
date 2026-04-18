@@ -14,15 +14,12 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('schedule_id')->constrained('class_shedules')->onDelete('cascade');
-            $table->enum('status', ['reserved', 'cancelled','attended'])->default('reserved');
+            $table->foreignId('schedule_id')->constrained('class_schedules')->onDelete('cascade');
+            $table->enum('status', ['Reservada', 'Cancelada'])->default('Reservada');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('reservations');

@@ -6,7 +6,7 @@
         <p class="lead mt-3">
             Reserva clases, controla tu progreso y organiza tu entrenamiento
         </p>
-        <a href="/register" class="btn btn-light btn-lg mt-4">
+        <a href="{{route('register')}}" class="btn btn-light btn-lg mt-4">
             Empieza ahora
         </a>
     </div>
@@ -19,27 +19,32 @@
                 <div class="card feature-card p-4">
                     <h4>Reserva de clases</h4>
                     <p>
-                        Reserva clases de forma rápida y sencilla desde cualquier dispositivo.
+                        Consulta la agenda de clases y reserva de forma rápida y sencilla desde cualquier dispositivo.
                     </p>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="card feature-card p-4">
-                    <h4>Control de aforo</h4>
+                    <h4>Gran variedad</h4>
                     <p>
-                        Consulta plazas disponibles en tiempo real para cada actividad.
+                            Accede a diferentes entrenamientos como fitness, yoga o cross training adaptados a tu nivel.
                     </p>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="card feature-card p-4">
-                    <h4>Gestión completa</h4>
+                    <h4>Entrenadores cualificados</h4>
                     <p>
-                        Administradores pueden gestionar usuarios, clases y estadísticas.
+                        Disfruta de sesiones guiadas por profesionales que te ayudarán a alcanzar tus objetivos.
                     </p>
                 </div>
+            </div>
+            <div class="col-md-2 m-auto mt-4">
+                  <a href="{{route('classes.index')}}" class="btn btn-primary">
+                        Ver clases
+                    </a>
             </div>
 
         </div>
@@ -59,121 +64,61 @@
 
         <div class="row g-4 justify-content-center">
 
-            <!-- Plan prueba -->
 
-            <div class="col-md-3">
-                <div class="card h-100 text-center p-4">
-                    
-                    <h5 class="fw-bold">Prueba</h5>
+            @foreach($plans as $plan)
+            <div class="col-12 col-md-6 col-lg-3">
 
+                <div class="card h-100 text-center p-4 
+                    {{ $plan->is_popular ? 'border-success shadow' : '' }}">
+
+               
+                    @if($plan->is_popular)
+                        <span class="badge bg-success mb-2">
+                            Más popular
+                        </span>
+                    @endif
+
+             
+                    <h5 class="fw-bold">
+                        {{ $plan->name }}
+                    </h5>
+
+               
                     <h2 class="my-3 text-success">
-                        Gratis
+                        @if($plan->price == 0)
+                            Gratis
+                        @else
+                            {{ $plan->price }}€
+                        @endif
                     </h2>
 
+          
                     <p class="text-muted">
-                        1 día de acceso completo al gimnasio
+                        {{ $plan->description }}
                     </p>
 
                     <ul class="list-unstyled mb-4">
-                        <li>Acceso a instalaciones</li>
-                        <li>Clases disponibles</li>
-                        <li>Sin compromiso</li>
+                        @foreach(@json_decode($plan->features) as $feature)
+                            <li>{{ $feature }}</li>
+                        @endforeach
                     </ul>
 
-                    <a href="/register" class="btn btn-outline-primary">
-                        Probar ahora
-                    </a>
+      
+                    @if($plan->price == 0)
+                        <a href="{{ route('register') }}" class="btn btn-outline-primary">
+                            Probar ahora
+                        </a>
+                    @else
+                        <a href="{{ route('payments.create', $plan) }}" 
+                           class="btn {{ $plan->is_popular ? 'btn-success' : 'btn-primary' }}">
+                            Elegir plan
+                        </a>
+                    @endif
 
                 </div>
+
             </div>
-
-            <!-- Plan mensual -->
-
-            <div class="col-md-3">
-                <div class="card h-100 text-center p-4">
-
-                    <h5 class="fw-bold">1 Mes</h5>
-
-                    <h2 class="my-3 text-success">
-                        35€
-                    </h2>
-
-                    <p class="text-muted">
-                        Acceso completo durante 1 mes
-                    </p>
-
-                    <ul class="list-unstyled mb-4">
-                        <li>Acceso ilimitado</li>
-                        <li>Reservar clases</li>
-                        <li>Soporte incluido</li>
-                    </ul>
-
-                    <a href="/register" class="btn btn-primary">
-                        Elegir plan
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- Plan 3 meses (destacado) -->
-
-            <div class="col-md-3">
-                <div class="card h-100 text-center p-4 border-success shadow">
-
-                    <span class="badge bg-success mb-2">
-                        Más popular
-                    </span>
-
-                    <h5 class="fw-bold">3 Meses</h5>
-
-                    <h2 class="my-3 text-success">
-                        99€
-                    </h2>
-
-                    <p class="text-muted">
-                        Ahorra con un plan trimestral
-                    </p>
-
-                    <ul class="list-unstyled mb-4">
-                        <li>Acceso ilimitado</li>
-                        <li>Reservar clases</li>
-                        <li>Descuento incluido</li>
-                    </ul>
-
-                    <a href="/register" class="btn btn-success">
-                        Elegir plan
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- Plan anual -->
-
-            <div class="col-md-3">
-                <div class="card h-100 text-center p-4">
-
-                    <h5 class="fw-bold">1 Año</h5>
-
-                    <h2 class="my-3 text-success">
-                        300€
-                    </h2>
-
-                    <p class="text-muted">
-                        La mejor opción para entrenar todo el año
-                    </p>
-
-                    <ul class="list-unstyled mb-4">
-                        <li>Acceso ilimitado</li>
-                        <li>Reservas prioritarias</li>
-                        <li>Mayor ahorro</li>
-                    </ul>
-
-                    <a href="/register" class="btn btn-primary">
-                        Elegir plan
-                    </a>
-
-                </div>
-            </div>
+             @endforeach
 
         </div>
 
